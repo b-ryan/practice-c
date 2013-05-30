@@ -1,0 +1,14 @@
+typedef struct List* t_list;
+
+/* Construction and deletion */
+t_list   list_new      ();
+void     list_delete   (t_list list);
+
+/* Inserting and removing */
+void     list_append   (t_list list, int data);
+void     list_remove   (t_list list, int index);
+
+/* Counting and getting */
+int      list_count    (t_list list);
+int      list_find     (t_list list, int data);
+int      list_get      (t_list list, int index);
