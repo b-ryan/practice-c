@@ -3,7 +3,7 @@
 #include "list.h"
 
 struct Node {
-  int data;
+  LIST_ITEM_TYPE data;
   struct Node* next;
 };
 
@@ -16,7 +16,7 @@ struct List {
 /***************************************/
 
 struct Node* node_new(
-  int data
+  LIST_ITEM_TYPE data
 ) {
   struct Node* node = malloc(sizeof(struct Node));
   node->data = data;
@@ -27,7 +27,7 @@ struct Node* node_new(
 void node_free(
   struct Node* node
 ) {
-  printf("Freeing node with data: %d\n", node->data);
+  LIST_ITEM_FREE(node->data);
   free(node);
 }
 
@@ -55,7 +55,7 @@ void list_free(
 
 void list_append(
   struct List* list,
-  int data
+  LIST_ITEM_TYPE data
 ) {
   printf("Appending node with data %d\n", data);
   struct Node* node = node_new(data);
@@ -78,7 +78,7 @@ int list_count(
 
 int list_find(
   struct List* list,
-  int data
+  LIST_ITEM_TYPE data
 ) {
   struct Node* curr = list->head;
   int index = 0;
@@ -93,7 +93,7 @@ int list_find(
   return -1;
 }
 
-int list_get(
+LIST_ITEM_TYPE list_get(
   struct List* list,
   int index
 ) {

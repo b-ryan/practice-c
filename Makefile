@@ -1,6 +1,6 @@
 all:
 
-bin/list: list/list.c list/list_main.c
+bin/list: list/list.h list/list.c list/list_main.c
 	gcc list/list.c list/list_main.c -o bin/list
 
 list: bin/list
