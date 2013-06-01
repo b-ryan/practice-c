@@ -3,8 +3,7 @@ typedef struct List* t_list;
 #ifndef LIST_ITEM_TYPE
 
   #define LIST_ITEM_TYPE int
-  #define LIST_ITEM_FREE(item) \
-    printf("Freeing balling node with data: %d\n", (item));
+  #define LIST_ITEM_FREE(item) /* noop */
 
 #endif
 

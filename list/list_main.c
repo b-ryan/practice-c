@@ -1,22 +1,47 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "list.h"
 
+#define TIME_START t = clock();
+#define TIME_STOP(event) \
+  t = clock() - t;\
+  printf("%s,%d,%f\n", event, n, ((float)t / CLOCKS_PER_SEC));
+
 int main(
-  char** argv,
-  int argc
+  int argc,
+  char** argv
 ) {
-  struct List* list = list_new();
+  if(argc < 2) {
+    puts("Please supply a number");
+    return 1;
+  }
 
-  list_append(list, 8);
-  list_append(list, 9);
-  list_append(list, 2);
+  int nitems = atoi(argv[1]);
+  t_list list = list_new();
 
-  printf("List size: %d\n", list_count(list));
-  printf("Index of node with data 9: %d\n", list_find(list, 9));
-  printf("Data at index 0: %d\n", list_get(list, 0));
-  printf("Data at index 2: %d\n", list_get(list, 2));
-  printf("Data at index -1: %d\n", list_get(list, -1));
+  printf("Event,N,Time\n");
+
+  int n;
+  clock_t t;
+
+  for(n = 0; n < nitems; n++) {
+    TIME_START
+    list_append(list, n);
+    TIME_STOP("append")
+
+    TIME_START
+    list_count(list);
+    TIME_STOP("count");
+
+    TIME_START
+    list_get(list, n / 2);
+    TIME_STOP("index");
+
+    TIME_START
+    list_find(list, n / 2);
+    TIME_STOP("search");
+  }
 
   list_free(list);
   return 0;

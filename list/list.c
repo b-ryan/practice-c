@@ -57,7 +57,6 @@ void list_append(
   struct List* list,
   LIST_ITEM_TYPE data
 ) {
-  printf("Appending node with data %d\n", data);
   struct Node* node = node_new(data);
   if(list->tail == NULL) {
     list->head = node;
